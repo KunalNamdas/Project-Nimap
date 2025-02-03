@@ -1,31 +1,14 @@
-version: '3.8'
+# Use official OpenJDK as base image
+FROM openjdk:17-jdk-slim
 
-services:
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/your_database_name
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD: rootpassword
-    depends_on:
-      - db
-    networks:
-      - app-network
+# Set working directory
+WORKDIR /app
 
-  db:
-    image: mysql:8
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: your_database_name
-    ports:
-      - "3306:3306"
-    networks:
-      - app-network
+# Copy the JAR file into the container (build your Spring Boot app first)
+COPY target/demo-0.0.1-SNAPSHOT.jar
 
-networks:
-  app-network:
-    driver: bridge
+# Expose the port your app will run on
+EXPOSE 8080
+
+# Run the application
+ENTRYPOINT ["java", "-jar", "target/demo-0.0.1-SNAPSHOT.jar"]
