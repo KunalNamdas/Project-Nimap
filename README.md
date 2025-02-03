@@ -131,5 +131,5 @@ Below is a simple ER diagram for the design:
   - In the `Product` class, the `@ManyToOne` annotation with `@JoinColumn(name = "category_id")` sets up the foreign key association.
  
     
-### 4)Docker** and **Jenkins
+### 4)Docker and Jenkins
 I have also added **Docker** and **Jenkins** support to automate deployment. The **Dockerfile** allows the Spring Boot application to be containerized, making it easy to deploy anywhere. The **docker-compose.yml** file helps spin up the application along with a MySQL database in a single command. Additionally, the **Jenkinsfile** automates the CI/CD pipeline, ensuring that the application is built, tested, and deployed using Jenkins. This integration makes the application scalable, portable, and easy to manage in production environments. 
